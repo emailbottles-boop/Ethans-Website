@@ -1,267 +1,220 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wizard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Natural Origins</title>
 
-<style>
-html, body {
-  margin: 0;
-  height: 100%;
-  overflow: hidden;
-  background: #07000f;
-  font-family: system-ui, sans-serif;
-  color: white;
-}
+  <style>
+    :root {
+      --blue-dark: #0a1f33;
+      --blue-main: #0f4c81;
+      --blue-soft: #5fa8d3;
+      --bg: #f4f9fc;
+      --card: #ffffff;
+      --text: #0a1f33;
+    }
 
-/* ===== DEVICE MODES ===== */
-body.mobile {
-  --bg-strength: 0.02;
-  --letter-max: 4;
-  --letter-size: 16vw;
-  --letter-life: 4200ms;
-}
-body.desktop {
-  --bg-strength: 0.07;
-  --letter-max: 7;
-  --letter-size: 32vw;
-  --letter-life: 9000ms;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-/* ===== BACKGROUND ===== */
-body::before {
-  content: "";
-  position: fixed;
-  inset: -120%;
-  background:
-    repeating-linear-gradient(
-      60deg,
-      rgba(255,220,120,0.15) 0px,
-      rgba(255,220,120,0.15) 1px,
-      transparent 1px,
-      transparent 70px
-    ),
-    repeating-linear-gradient(
-      -60deg,
-      rgba(180,0,255,0.2) 0px,
-      rgba(180,0,255,0.2) 1px,
-      transparent 1px,
-      transparent 100px
-    );
-  transform: translate(
-    calc(var(--mx, 0px) * -1 * var(--bg-strength)),
-    calc(var(--my, 0px) * -1 * var(--bg-strength))
-  );
-  pointer-events: none;
-}
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-/* ===== NEON EDGES ===== */
-.edge {
-  position: fixed;
-  inset: 0;
-  border-left: 2px solid rgba(255,220,120,0.5);
-  border-right: 2px solid rgba(180,0,255,0.5);
-  pointer-events: none;
-}
+    header {
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue-main));
+      color: white;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
 
-/* ===== CRYPTO FIELD ===== */
-#cryptoField {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-}
+    header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.08em;
+    }
 
-.crypto {
-  position: absolute;
-  font-weight: 900;
-  opacity: 0.85;
-  color: rgba(230,160,255,0.4);
-  text-shadow:
-    0 0 30px rgba(255,220,255,0.9),
-    0 0 90px rgba(180,80,255,0.8),
-    0 0 140px rgba(255,220,120,0.6);
-  animation: drift var(--letter-life) ease-out forwards;
-}
+    header p {
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
 
-@keyframes drift {
-  from {
-    transform: translateY(40px) scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-180px) scale(1.3);
-    opacity: 0;
-  }
-}
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
 
-/* ===== SCREENS ===== */
-.screen {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2.2rem;
-  text-align: center;
-}
-.hidden { display: none; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      font-size: 0.75rem;
+      opacity: 0.85;
+    }
 
-/* ===== LOGO ===== */
-.logo {
-  width: 340px;
-  max-width: 85vw;
-  filter: drop-shadow(0 0 70px rgba(200,120,255,0.9));
-  transition: transform 0.15s ease-out;
-}
+    nav a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
 
-/* ===== BUTTON ===== */
-.btn {
-  min-width: 240px;
-  padding: 1.1rem 2.8rem;
-  background: linear-gradient(135deg, #ffe066, #b000ff);
-  color: black;
-  border: none;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 900;
-  letter-spacing: 0.35em;
-  cursor: pointer;
-}
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-/* ===== UPDATES ===== */
-.video-card img {
-  width: 260px;
-  border-radius: 14px;
-}
+    section h2 {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-size: 1.8rem;
+      color: var(--blue-main);
+      letter-spacing: 0.15em;
+    }
 
-.caption {
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-}
+    /* BLOG */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
 
-.merch {
-  padding: 1.1rem;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.08);
-  color: #fff2a8;
-}
+    .blog-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
 
-/* ===== EMAIL ===== */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
+    .blog-card h3 {
+      margin-top: 0;
+      color: var(--blue-dark);
+    }
 
-form input {
-  width: 250px;
-  padding: 0.85rem;
-  border-radius: 999px;
-  border: 1px solid rgba(200,120,255,0.6);
-  background: rgba(0,0,0,0.45);
-  color: white;
-  text-align: center;
-}
-</style>
+    .blog-card p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      transition: transform 0.25s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.04);
+    }
+
+    /* STORE */
+    .store {
+      text-align: center;
+      background: linear-gradient(135deg, #eaf4fb, #d6ebf7);
+      border-radius: 22px;
+      padding: 3.5rem 2rem;
+    }
+
+    .store h3 {
+      margin-bottom: 1rem;
+      color: var(--blue-dark);
+    }
+
+    .store p {
+      max-width: 500px;
+      margin: 0 auto;
+      opacity: 0.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="edge"></div>
-<div id="cryptoField"></div>
+<header>
+  <h1>NATURAL ORIGINS</h1>
+  <p>Plants, growth, and living things — documented naturally.</p>
 
-<div class="screen" id="home">
-  <img src="wizshtlogo_trans.png" class="logo" id="logo">
-  <button class="btn" id="enterBtn">ENTER</button>
-</div>
+  <nav>
+    <a href="#blog">BLOG</a>
+    <a href="#plants">PLANTS</a>
+    <a href="#store">STORE</a>
+  </nav>
+</header>
 
-<div class="screen hidden" id="updates">
-  <div class="video-card">
-    <a href="https://www.youtube.com/watch?v=H6cNCTofnrs" target="_blank">
-      <img src="https://img.youtube.com/vi/H6cNCTofnrs/hqdefault.jpg">
-    </a>
-    <div class="caption">Christmas In Wizard City</div>
+<section id="blog">
+  <h2>BLOG</h2>
+
+  <div class="blog-grid">
+    <div class="blog-card">
+      <h3>First Growth</h3>
+      <p>A short entry about where Natural Origins begins and what you're growing.</p>
+    </div>
+
+    <div class="blog-card">
+      <h3>Plant Notes</h3>
+      <p>Care tips, experiments, and observations as your plants evolve.</p>
+    </div>
+
+    <div class="blog-card">
+      <h3>Seasonal Changes</h3>
+      <p>Tracking light, water, and environment across seasons.</p>
+    </div>
   </div>
+</section>
 
-  <div class="merch">Merchandise coming soon!</div>
+<section id="plants">
+  <h2>PLANTS</h2>
 
-  <form action="https://formspree.io/f/mrelgwzp" method="POST">
-    <input id="emailInput" type="email" name="email" placeholder="EMAIL FOR UPDATES" required>
-    <button class="btn" type="submit">SUBMIT</button>
-  </form>
+  <div class="gallery">
+    <!-- Replace these with your real plant images -->
+    <img src="https://via.placeholder.com/600x400?text=Plant+1" alt="Plant 1">
+    <img src="https://via.placeholder.com/600x400?text=Plant+2" alt="Plant 2">
+    <img src="https://via.placeholder.com/600x400?text=Plant+3" alt="Plant 3">
+    <img src="https://via.placeholder.com/600x400?text=Plant+4" alt="Plant 4">
+  </div>
+</section>
 
-  <button class="btn" id="backBtn">BACK</button>
-</div>
+<section id="store">
+  <h2>STORE</h2>
 
-<script>
-const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-document.body.classList.add(isMobile ? "mobile" : "desktop");
+  <div class="store">
+    <h3>Coming Soon</h3>
+    <p>
+      Seeds, plants, and natural goods will be available here soon.
+      Built slowly. Built right.
+    </p>
+  </div>
+</section>
 
-const home = document.getElementById("home");
-const updates = document.getElementById("updates");
-const enterBtn = document.getElementById("enterBtn");
-const backBtn = document.getElementById("backBtn");
-const cryptoField = document.getElementById("cryptoField");
-const emailInput = document.getElementById("emailInput");
-const logo = document.getElementById("logo");
-
-/* Mouse effects ONLY on desktop */
-if (!isMobile) {
-  document.addEventListener("mousemove", e => {
-    document.body.style.setProperty("--mx", e.clientX + "px");
-    document.body.style.setProperty("--my", e.clientY + "px");
-
-    const r = logo.getBoundingClientRect();
-    const d = Math.hypot(
-      e.clientX - (r.left + r.width / 2),
-      e.clientY - (r.top + r.height / 2)
-    );
-    const i = Math.max(0, 1 - d / 320);
-    logo.style.transform = `scale(${1 + i * 0.3})`;
-  });
-}
-
-/* Page switching */
-enterBtn.onclick = () => {
-  home.classList.add("hidden");
-  updates.classList.remove("hidden");
-};
-backBtn.onclick = () => {
-  updates.classList.add("hidden");
-  home.classList.remove("hidden");
-  cryptoField.innerHTML = "";
-};
-
-/* SAFE LETTER SPAWN */
-emailInput.addEventListener("keydown", e => {
-  if (e.key.length !== 1 || !/[a-zA-Z@._-]/.test(e.key)) return;
-  if (cryptoField.children.length > 18) return;
-
-  const count = Math.min(
-    parseInt(getComputedStyle(document.body).getPropertyValue("--letter-max")),
-    3
-  );
-
-  for (let i = 0; i < count; i++) {
-    const el = document.createElement("div");
-    el.className = "crypto";
-    el.textContent = e.key.toUpperCase();
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.top = Math.random() * 100 + "vh";
-    el.style.fontSize =
-      Math.random() * parseFloat(getComputedStyle(document.body).getPropertyValue("--letter-size")) + "vw";
-    el.style.transform = `rotate(${Math.random() < 0.3 ? 180 : Math.random() * 360}deg)`;
-    cryptoField.appendChild(el);
-    setTimeout(() => el.remove(), parseInt(getComputedStyle(document.body).getPropertyValue("--letter-life")));
-  }
-});
-</script>
+<footer>
+  © 2026 Natural Origins
+</footer>
 
 </body>
 </html>
