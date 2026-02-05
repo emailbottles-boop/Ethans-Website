@@ -111,6 +111,18 @@
       gap: 1.5rem;
     }
 
+    .plant-item {
+      text-align: center;
+    }
+
+    .plant-item h4 {
+      margin: 0 0 0.75rem 0;
+      color: var(--blue-dark);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
     .gallery img {
       width: 100%;
       height: 240px;
@@ -201,7 +213,7 @@
   <nav>
     <a href="#blog">BLOG</a>
     <a href="#plants">PLANTS</a>
-    <a href="#newsletter">NEWSLETTER</a>
+    <a href="#newsletter">REACH OUT</a>
   </nav>
 </header>
 
@@ -210,18 +222,12 @@
 
   <div class="blog-grid">
     <div class="blog-card">
-      <h3>First Growth</h3>
-      <p>A short entry about where Natural Origins begins and what you're growing.</p>
     </div>
 
     <div class="blog-card">
-      <h3>Plant Notes</h3>
-      <p>Care tips, experiments, and observations as your plants evolve.</p>
     </div>
 
     <div class="blog-card">
-      <h3>Seasonal Changes</h3>
-      <p>Tracking light, water, and environment across seasons.</p>
     </div>
   </div>
 </section>
@@ -230,10 +236,25 @@
   <h2>PLANTS</h2>
 
   <div class="gallery">
-    <img src="20240518_122453.jpg" alt="Pink Rose" />
-    <img src="blackmadeiraUCD2.jpg" alt="Black Madeira Fig" />
-    <img src="blackmadeiraUCD4.jpg" alt="Black Madeira Fig Leaves" />
-    <img src="robertsgoldenrainbow3.jpg" alt="Roberts Golden Rainbow Fig" />
+    <div class="plant-item">
+      <h4>Pink Rose</h4>
+      <img src="20240518_122453.jpg" alt="Pink Rose" />
+    </div>
+    
+    <div class="plant-item">
+      <h4>Black Madeira Fig</h4>
+      <img src="blackmadeiraUCD2.jpg" alt="Black Madeira Fig" />
+    </div>
+    
+    <div class="plant-item">
+      <h4>Black Madeira Fig</h4>
+      <img src="blackmadeiraUCD4.jpg" alt="Black Madeira Fig Leaves" />
+    </div>
+    
+    <div class="plant-item">
+      <h4>Roberts Golden Rainbow Fig</h4>
+      <img src="robertsgoldenrainbow3.jpg" alt="Roberts Golden Rainbow Fig" />
+    </div>
   </div>
 </section>
 
@@ -241,7 +262,7 @@
   <h2>STAY CONNECTED</h2>
 
   <div class="newsletter">
-    <h3>Join Our Newsletter</h3>
+    <h3>Want to Stay Connected?</h3>
     <p>Get updates on new plants, seeds, and natural goods. Built slowly. Built right.</p>
     
     <form action="https://formspree.io/f/maqdwnyb" method="POST">
